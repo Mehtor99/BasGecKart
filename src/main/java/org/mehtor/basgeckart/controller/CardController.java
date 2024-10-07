@@ -5,9 +5,9 @@ import org.mehtor.basgeckart.entity.Card;
 import org.mehtor.basgeckart.service.CardService;
 import org.mehtor.basgeckart.utility.DataGenerator;
 import org.mehtor.basgeckart.utility.enums.CardType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -47,6 +47,18 @@ public class CardController {
 		
 		cardService.addAllCard(List.of(card, card1, card2, card3));
 		return "Kayıtlar başarıyla eklendi";
+	}
+	
+	@PostMapping("/add-balance")
+	public ResponseEntity<String> addBalance (Long cardId,Double balance) {
+		try {
+			cardService.addBalance(cardId,balance);
+			return ResponseEntity.ok("Bakiye eklendi");
+		}catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.badRequest().body("Bakiye eklenirken hata !!");
+		}
+		
 	}
 	
 }

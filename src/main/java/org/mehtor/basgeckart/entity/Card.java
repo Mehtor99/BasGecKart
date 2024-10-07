@@ -27,4 +27,8 @@ public class Card extends BaseEntity{
 	LocalDate visaDate;
 	LocalDateTime lastUsed;
 	
+	
+	public void addBalance(Double amount) {
+		this.balance += amount;
+	}
 }

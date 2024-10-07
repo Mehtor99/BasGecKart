@@ -20,7 +20,7 @@ public class Payment extends BaseEntity{
 	
 	PaymentType paymentType;
 	@Column(unique = true, nullable = false)
-	Long cardNumber;
+	String cardNumber;
 	Double balance;
 	Long passengerId;
 	
