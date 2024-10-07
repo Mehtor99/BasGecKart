@@ -2,9 +2,11 @@ package org.mehtor.basgeckart.controller;
 
 import lombok.AllArgsConstructor;
 import org.mehtor.basgeckart.entity.Card;
+import org.mehtor.basgeckart.entity.Recharge;
 import org.mehtor.basgeckart.service.CardService;
 import org.mehtor.basgeckart.utility.DataGenerator;
 import org.mehtor.basgeckart.utility.enums.CardType;
+import org.mehtor.basgeckart.utility.enums.PaymentType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/card")
 public class CardController {
-	private CardService cardService;
+	private final CardService cardService;
 	private DataGenerator dataGenerator = new DataGenerator()  ;
 	
 	@GetMapping("/add-all-cards")
@@ -50,9 +52,9 @@ public class CardController {
 	}
 	
 	@PostMapping("/add-balance")
-	public ResponseEntity<String> addBalance (Long cardId,Double balance) {
+	public ResponseEntity<String> addBalance (Long cardId, Double amount, PaymentType paymentType) {
 		try {
-			cardService.addBalance(cardId,balance);
+			cardService.addBalance(cardId,amount,paymentType);
 			return ResponseEntity.ok("Bakiye eklendi");
 		}catch (Exception e) {
 			e.printStackTrace();

@@ -15,7 +15,7 @@ import java.util.Random;
 @RestController
 @RequestMapping("/passenger")
 public class PassengerController {
-	private PassengerService passengerService;
+	private final PassengerService passengerService;
 	
 	@GetMapping("/add-all-passengers")
 	public String addAllPassengers() {
